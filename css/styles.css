@@ -29,7 +29,7 @@
 
 @keyframes float {
     0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
+    50% { transform: translateY(-20px); }
 }
 
 @keyframes bounce {
@@ -39,6 +39,26 @@
     90% { transform: translateY(-4px); }
 }
 
+@keyframes floatElement {
+    0%, 100% { 
+        transform: translate(calc(var(--x) * 1px), calc(var(--y) * 1px)) rotate(0deg); 
+    }
+    25% { 
+        transform: translate(calc(var(--x) * 1.1px), calc(var(--y) * 0.9px)) rotate(2deg); 
+    }
+    50% { 
+        transform: translate(calc(var(--x) * 0.9px), calc(var(--y) * 1.1px)) rotate(-2deg); 
+    }
+    75% { 
+        transform: translate(calc(var(--x) * 1.1px), calc(var(--y) * 0.9px)) rotate(2deg); 
+    }
+}
+
+@keyframes scrollBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
 /* Animation classes */
 .fade-in {
     opacity: 1 !important;
@@ -46,7 +66,139 @@
 }
 
 .animate-fade-in-up {
-    animation: fadeInUp 0.8s ease-out;
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-delay-1 {
+    animation-delay: 0.5s;
+}
+
+.animate-float-delay-2 {
+    animation-delay: 1s;
+}
+
+/* Floating Elements */
+.floating-elements {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.floating-element {
+    position: absolute;
+    animation: floatElement 15s ease-in-out infinite;
+    animation-delay: var(--delay, 0s);
+    transform-origin: center;
+}
+
+/* Parallax Effect */
+.parallax-bg {
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.scroll-indicator span {
+    display: block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: white;
+    opacity: 0.6;
+    animation: scrollBounce 1.5s infinite;
+}
+
+.scroll-indicator span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.scroll-indicator span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+/* Explore Button Animation */
+.explore-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: 0.5s;
+}
+
+.explore-btn:hover::before {
+    left: 100%;
+}
+
+/* Gallery Item Hover Effect */
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.gallery-item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.gallery-item:hover::after {
+    opacity: 1;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .floating-element {
+        display: none;
+    }
+    
+    .animate-float {
+        animation: float 4s ease-in-out infinite;
+    }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #f59e0b;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #d97706;
 }
 
 .animate-slide-in-left {
