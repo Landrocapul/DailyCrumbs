@@ -1,83 +1,353 @@
-// Main JavaScript functionality for DailyCrumbs website
-// This file contains general functionality for the landing page
+// Enhanced Animation System for DailyCrumbs
+// Implements micro-animations, scroll-reveal, hero animations, subtle parallax, and mask & reveal effects
 
-// Smooth scrolling for navigation links
 document.addEventListener('DOMContentLoaded', function() {
-    // Add smooth scrolling to all anchor links
-    const anchorLinks = document.querySelectorAll('a[href^="#"]');
-    anchorLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href').substring(1);
-            const targetElement = document.getElementById(targetId);
-            
-            if (targetElement) {
-                targetElement.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
+    // Initialize all animation systems
+    initScrollReveal();
+    initHeroAnimations();
+    initMicroAnimations();
+    initParallax();
+    initFloatingElements();
+    initCounterAnimations();
+    initButtonInteractions();
+    initMaskRevealAnimations();
+});
+
+// ===== MASK & REVEAL ANIMATIONS =====
+function initMaskRevealAnimations() {
+    // Line reveal animations
+    initLineReveal();
+    
+    // Circle and wave reveals
+    initCircleWaveReveal();
+    
+    // Curtain animations
+    initCurtainReveal();
+    
+    // Interactive spotlight reveals
+    initSpotlightReveal();
+    
+    // Text mask reveals
+    initTextMaskReveal();
+}
+
+// Line Reveal Text Animation
+function initLineReveal() {
+    const lineRevealElements = document.querySelectorAll('.line-reveal');
+    
+    lineRevealElements.forEach(element => {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                    entry.target.classList.remove('animate-out');
+                } else {
+                    entry.target.classList.add('animate-out');
+                    entry.target.classList.remove('animate-in');
+                }
+            });
+        }, { 
+            threshold: [0, 0.1, 0.5, 1],
+            rootMargin: '0px' 
         });
+        
+        element.classList.add('animate-out');
+        observer.observe(element);
     });
     
-    // Enhanced scroll animations with Intersection Observer
+    // Staggered line reveal
+    const staggerElements = document.querySelectorAll('.line-reveal-stagger');
+    staggerElements.forEach(element => {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                    entry.target.classList.remove('animate-out');
+                } else {
+                    entry.target.classList.add('animate-out');
+                    entry.target.classList.remove('animate-in');
+                }
+            });
+        }, { 
+            threshold: [0, 0.1, 0.5, 1],
+            rootMargin: '0px' 
+        });
+        
+        element.classList.add('animate-out');
+        observer.observe(element);
+    });
+}
+
+// Circle and Wave Reveal Effects
+function initCircleWaveReveal() {
+    // Circle reveal for images
+    const circleRevealElements = document.querySelectorAll('.circle-reveal');
+    
+    circleRevealElements.forEach(element => {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                    entry.target.classList.remove('animate-out');
+                } else {
+                    entry.target.classList.add('animate-out');
+                    entry.target.classList.remove('animate-in');
+                }
+            });
+        }, { 
+            threshold: [0, 0.1, 0.5, 1],
+            rootMargin: '0px' 
+        });
+        
+        element.classList.add('animate-out');
+        observer.observe(element);
+    });
+    
+    // Wave reveal effects
+    const waveRevealElements = document.querySelectorAll('.wave-reveal');
+    
+    waveRevealElements.forEach(element => {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                    entry.target.classList.remove('animate-out');
+                } else {
+                    entry.target.classList.add('animate-out');
+                    entry.target.classList.remove('animate-in');
+                }
+            });
+        }, { 
+            threshold: [0, 0.1, 0.5, 1],
+            rootMargin: '0px' 
+        });
+        
+        element.classList.add('animate-out');
+        observer.observe(element);
+    });
+}
+
+// Curtain Reveal Animations
+function initCurtainReveal() {
+    const curtainElements = document.querySelectorAll('.curtain-open, .curtain-vertical');
+    
+    curtainElements.forEach(element => {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                    entry.target.classList.remove('animate-out');
+                } else {
+                    entry.target.classList.add('animate-out');
+                    entry.target.classList.remove('animate-in');
+                }
+            });
+        }, { 
+            threshold: [0, 0.1, 0.5, 1],
+            rootMargin: '0px' 
+        });
+        
+        element.classList.add('animate-out');
+        observer.observe(element);
+    });
+}
+
+// Interactive Spotlight Reveal
+function initSpotlightReveal() {
+    const spotlightElements = document.querySelectorAll('.spotlight-reveal');
+    
+    spotlightElements.forEach(element => {
+        element.addEventListener('mousemove', (e) => {
+            const rect = element.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width) * 100;
+            const y = ((e.clientY - rect.top) / rect.height) * 100;
+            
+            element.style.setProperty('--x', `${x}%`);
+            element.style.setProperty('--y', `${y}%`);
+        });
+        
+        element.addEventListener('mouseenter', () => {
+            element.classList.add('revealed');
+        });
+        
+        element.addEventListener('mouseleave', () => {
+            element.classList.remove('revealed');
+        });
+    });
+}
+
+// Text Mask Reveal
+function initTextMaskReveal() {
+    const textMaskElements = document.querySelectorAll('.text-mask-reveal');
+    
+    textMaskElements.forEach(element => {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                    entry.target.classList.remove('animate-out');
+                    const text = element.textContent;
+                    element.setAttribute('data-text', text);
+                } else {
+                    entry.target.classList.add('animate-out');
+                    entry.target.classList.remove('animate-in');
+                }
+            });
+        }, { 
+            threshold: [0, 0.1, 0.5, 1],
+            rootMargin: '0px' 
+        });
+        
+        element.classList.add('animate-out');
+        observer.observe(element);
+    });
+}
+
+// ===== SCROLL-REVEAL ANIMATIONS =====
+function initScrollReveal() {
     const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
+        threshold: [0, 0.1, 0.5, 1],
+        rootMargin: '0px'
     };
     
     const observer = new IntersectionObserver(function(entries) {
-        entries.forEach((entry, index) => {
+        entries.forEach(entry => {
             if (entry.isIntersecting) {
-                setTimeout(() => {
-                    entry.target.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }, index * 100); // Stagger animations
-                observer.unobserve(entry.target);
+                entry.target.classList.add('animate-in');
+                entry.target.classList.remove('animate-out');
+                
+                // Handle staggered animations
+                if (entry.target.classList.contains('reveal-stagger')) {
+                    const children = entry.target.children;
+                    Array.from(children).forEach((child, index) => {
+                        setTimeout(() => {
+                            child.style.opacity = '1';
+                            child.style.transform = 'translateY(0)';
+                        }, index * 150);
+                    });
+                }
+            } else {
+                entry.target.classList.add('animate-out');
+                entry.target.classList.remove('animate-in');
             }
         });
     }, observerOptions);
     
-    // Observe all sections and cards for animation
-    const animatedElements = document.querySelectorAll('section, .group');
-    animatedElements.forEach((element, index) => {
-        // Only set initial state if not already visible
-        const rect = element.getBoundingClientRect();
-        if (rect.top > window.innerHeight || rect.bottom < 0) {
-            element.style.opacity = '0';
-            element.style.transform = 'translateY(30px)';
+    // Observe all elements with entrance animations
+    const animatedElements = document.querySelectorAll('.slide-fade-entrance, .scale-fade-entrance, .rotate-fade-entrance, .bounce-entrance, .flip-entrance, .slide-up-entrance, .slide-down-entrance, .zoom-entrance, .reveal, .reveal-stagger, .curtain-open, .curtain-vertical, .diagonal-reveal, .text-mask-reveal');
+    animatedElements.forEach(element => {
+        element.classList.add('animate-out');
+        observer.observe(element);
+    });
+}
+
+// ===== HERO SECTION ANIMATIONS =====
+function initHeroAnimations() {
+    // Apply hero animations with proper timing
+    const heroTitle = document.querySelector('h1');
+    const heroSubtitle = document.querySelector('.text-xl.md\\:text-2xl');
+    const heroCta = document.querySelector('.explore-btn');
+    
+    if (heroTitle) heroTitle.classList.add('hero-title');
+    if (heroSubtitle) heroSubtitle.classList.add('hero-subtitle');
+    if (heroCta) heroCta.classList.add('hero-cta');
+    
+    // Animate floating pastry elements
+    const floatingElements = document.querySelectorAll('.floating-element');
+    floatingElements.forEach((element, index) => {
+        element.style.opacity = '0';
+        element.style.transform = 'translateY(20px)';
+        
+        setTimeout(() => {
             element.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
-            observer.observe(element);
-        } else {
-            // Element is already visible, ensure it's shown
             element.style.opacity = '1';
             element.style.transform = 'translateY(0)';
+        }, 1200 + (index * 200));
+    });
+}
+
+// ===== MICRO-ANIMATIONS =====
+function initMicroAnimations() {
+    // Apply micro-animations to buttons
+    const buttons = document.querySelectorAll('button, a[href]');
+    buttons.forEach(button => {
+        button.classList.add('btn-micro');
+    });
+    
+    // Apply card hover effects
+    const cards = document.querySelectorAll('.group, .design-card');
+    cards.forEach(card => {
+        card.classList.add('card-micro');
+    });
+    
+    // Icon animations
+    const icons = document.querySelectorAll('.text-3xl, .text-4xl, .text-5xl, .text-6xl, .text-7xl, .text-8xl');
+    icons.forEach((icon, index) => {
+        icon.classList.add('icon-fade-up');
+        
+        setTimeout(() => {
+            icon.classList.add('animate');
+        }, 800 + (index * 100));
+    });
+}
+
+// ===== SUBTLE PARALLAX =====
+function initParallax() {
+    const parallaxElements = document.querySelectorAll('.parallax-slow, .parallax-bg');
+    
+    let ticking = false;
+    function updateParallax() {
+        const scrolled = window.pageYOffset;
+        
+        parallaxElements.forEach(element => {
+            const speed = element.classList.contains('parallax-slow') ? 0.3 : 0.5;
+            const yPos = -(scrolled * speed);
+            element.style.transform = `translateY(${yPos}px)`;
+        });
+        
+        ticking = false;
+    }
+    
+    function requestTick() {
+        if (!ticking) {
+            window.requestAnimationFrame(updateParallax);
+            ticking = true;
         }
-    });
+    }
     
-    // Enhanced card interactions
-    const pastryCards = document.querySelectorAll('.group');
-    pastryCards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            this.classList.add('hover-lift');
-            
-            // Add a subtle glow effect
-            this.style.boxShadow = '0 20px 40px rgba(245, 158, 11, 0.2)';
-        });
-        
-        card.addEventListener('mouseleave', function() {
-            this.classList.remove('hover-lift');
-            this.style.boxShadow = '';
-        });
-        
-        // Add ripple effect on click
-        card.addEventListener('click', function(e) {
-            createRipple(e, this);
-        });
+    window.addEventListener('scroll', requestTick);
+}
+
+// ===== FLOATING ELEMENTS =====
+function initFloatingElements() {
+    const floatingBg = document.querySelectorAll('.absolute .text-8xl, .absolute .text-7xl, .absolute .text-6xl');
+    floatingBg.forEach((element, index) => {
+        element.classList.add('floating-bg');
+        element.style.animationDelay = `${index * 2}s`;
     });
+}
+
+// ===== COUNTER ANIMATIONS =====
+function initCounterAnimations() {
+    const statsNumbers = document.querySelectorAll('.text-4xl.md\\:text-5xl');
     
-    // Handle "Add to Cart" buttons with enhanced feedback
+    const statsObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateCounter(entry.target);
+                statsObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+    
+    statsNumbers.forEach(stat => {
+        statsObserver.observe(stat);
+    });
+}
+
+// ===== BUTTON INTERACTIONS =====
+function initButtonInteractions() {
+    // Enhanced "Add to Cart" buttons
     const addToCartButtons = document.querySelectorAll('button');
     addToCartButtons.forEach(button => {
         if (button.textContent.includes('Add to Cart')) {
@@ -96,42 +366,16 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Add parallax effect to hero section
-    const heroSection = document.querySelector('section.relative');
-    if (heroSection) {
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const parallaxElements = heroSection.querySelectorAll('.absolute');
-            
-            parallaxElements.forEach((element, index) => {
-                const speed = 0.5 + (index * 0.1);
-                element.style.transform = `translateY(${scrolled * speed}px)`;
-            });
+    // Add ripple effects to buttons
+    const allButtons = document.querySelectorAll('button, .btn-micro');
+    allButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            createRipple(e, this);
         });
-    }
-    
-    // Add floating animation to decorative elements
-    const decorativeElements = document.querySelectorAll('.absolute .text-8xl, .absolute .text-7xl, .absolute .text-6xl, .absolute .text-5xl');
-    decorativeElements.forEach((element, index) => {
-        element.classList.add('animate-float');
-        element.style.animationDelay = `${index * 0.5}s`;
     });
-    
-    // Counter animation for stats
-    const statsNumbers = document.querySelectorAll('.text-4xl, .text-5xl');
-    const statsObserver = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                animateCounter(entry.target);
-                statsObserver.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.5 });
-    
-    statsNumbers.forEach(stat => {
-        statsObserver.observe(stat);
-    });
-});
+}
+
+// ===== UTILITY FUNCTIONS =====
 
 // Ripple effect function
 function createRipple(event, element) {
