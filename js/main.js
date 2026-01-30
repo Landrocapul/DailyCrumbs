@@ -449,7 +449,7 @@ function handleAddToCart(button) {
             </span>
         `;
         button.classList.add('bg-green-600', 'hover:bg-green-700');
-        button.classList.remove('bg-gradient-to-r', 'from-amber-600', 'to-orange-600');
+        button.classList.remove('bg-gradient-to-r', 'from-amber-600', 'to-amber-600');
         
         // Show notification
         showNotification(`${productName} added to cart! 🛒`, 'success');
@@ -459,7 +459,7 @@ function handleAddToCart(button) {
             button.innerHTML = originalContent;
             button.disabled = false;
             button.classList.remove('bg-green-600', 'hover:bg-green-700');
-            button.classList.add('bg-gradient-to-r', 'from-amber-600', 'to-orange-600');
+            button.classList.add('bg-gradient-to-r', 'from-amber-600', 'to-amber-600');
         }, 2000);
     }, 1000);
 }

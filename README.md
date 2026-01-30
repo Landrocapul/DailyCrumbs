@@ -22,7 +22,7 @@ DailyCrumbs is a web application designed to serve both customers looking for fr
 ## Technologies Used
 
 - **Frontend**: HTML5, Tailwind CSS, JavaScript
-- **Design**: Warm pastry-themed color scheme (amber/orange tones)
+- **Design**: Warm pastry-themed color scheme (amber tones)
 - **Icons**: SVG icons for social media and navigation
 - **Images**: Placeholder images from Picsum for demonstration
 
@@ -53,7 +53,7 @@ DailyCrumbs/
 ## Color Scheme
 
 - **Primary**: Amber (#f59e0b) - Warm, inviting, pastry-themed
-- **Secondary**: Orange (#ea580c) - Complementary warm tone
+- **Secondary**: Amber-600 (#d97706) - Complementary warm tone
 - **Background**: Amber-50 (#fef3c7) - Light, creamy background
 - **Text**: Amber-900 (#78350f) - Dark, readable text
 - **White**: Pure white for cards and forms
